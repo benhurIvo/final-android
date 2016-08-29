@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div>
+    <script>
+        function vg(){
+            $( "#popup" ).popup( "open" );
+            var obj = '{"firstname":"'+$('#fn').val()+'","lastname":"'+$('#ln').val()+'","birthdate":"'+$('#bd').val()+'"}~~{"wt":"'+$('#wt').val()+'"}~~{"ht":"'+$('#ht').val()+'"}';
+            Android.posst(obj);    
+        }
+      
+    </script>
+    <table>
+        <thead>Register</thead>
+        <tr>
+            <td>FName</td>
+            <td><input id="fn" type="text" style="width: 80%;"/></td>
+        </tr>
+        <tr>
+            <td>LName</td>
+            <td><input id="ln" type="text" style="width: 80%;"/></td>
+        </tr>
+        <tr>
+            <td>D.O.B</td>
+            <td><input id="bd" type="text" style="width: 80%;"/></td>
+        </tr>
+        <tr>
+            <td>Wt(kg)</td>
+            <td><input id="wt" type="text" style="width: 80%;"/></td>
+        </tr>   
+        <tr>
+            <td>Ht(m)</td>
+            <td><input id="ht" type="text" style="width: 80%;"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+       <input type="button" onclick="vg();" value="submit"/>
+       </td>
+        </tr>
+       
+    </table>
+</div>

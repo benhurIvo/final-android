@@ -1,0 +1,38 @@
+<html>
+<head>
+<style>
+.iics {
+        background: #990099 !important;
+        color:#fff !important;
+    }
+</style>
+<link rel="stylesheet" href="jquery.mobile-git.css" /> 
+        <script src="jquery-1.9.1.js"></script> 
+        <script src="jquery.mobile-git.js"></script> 
+<script>
+function loadDiv(Url, TargetDiv){    
+            loading();
+                    $.get(Url, function (data) {
+                        $('#'+TargetDiv).html(data).trigger("create");
+                    }); 
+                } 
+</script>
+</head>
+<body>
+<div data-role="page">
+<div data-role="header"  class="iics" align='center'>
+		<h1>IICS</h1>
+	</div><!-- /header -->
+<div role="content" class="ui-content " align="center">
+<div>klgkjgj
+            <button onclick="Android.getHome()" 
+            class="iics ui-btn ui-icon-home ui-btn-icon-left">Home</button>
+                   <button href="#" onclick="Android.exitApp()" class="iics ui-btn ui-icon-power ui-btn-icon-left">Logout</button>
+        <button href="#" class="iics ui-btn ui-icon-info ui-btn-icon-left">About</button>
+    
+    </div>
+            
+</div>
+</div>
+</body>
+</html>

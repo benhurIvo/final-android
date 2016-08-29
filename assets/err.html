@@ -1,0 +1,44 @@
+<html>
+<head>
+<style>
+.iics {
+        background: #990099 !important;
+        color:#fff !important;
+    }
+</style>
+<link rel="stylesheet" href="jquery.mobile-git.css" /> 
+        <script src="jquery-1.9.1.js"></script> 
+        <script src="jquery.mobile-git.js"></script> 
+<script>
+            $( document ).on( "pagecreate", "#main-page", function() {
+            var d = new Date();
+                    $('#foot').html("&copy;"+d.getFullYear() +" IICS Technologies. All Rights Reserved.");
+});
+         function showAndroidToast(toast) {
+        Android.showToast(toast);
+    }
+       
+        </script>
+</head>
+<body>
+<div data-role="page" id="main-page">
+<div data-role="header"  class="iics" align='center'>
+		<h1>IICS</h1>
+	</div><!-- /header -->
+<div role="content" class="ui-content " align="center">
+<strong>
+Sorry we are unable to connect.<br>
+Please try again or contact your system administrator for help.
+<strong>
+<br><br>
+<a class="ui-btn ui-btn-up-c ui-shadow ui-btn-corner-all ui-btn-inline" 
+onClick="Android.exitApp()" ><span class="ui-btn-inner">
+            Exit</span></a>
+            
+</div>
+<div data-role="footer" data-position="fixed" class="iics" >
+    <h4 style="text-align:center;" id="foot"></h4>
+</div>
+</div>
+</body>
+</html>

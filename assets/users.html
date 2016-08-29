@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+  <link rel="stylesheet" href="jquery.mobile-1.3.1.min.css" />
+    <script type="text/javascript" src="jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="jquery.mobile-1.3.1.min.js"></script>
+    <script>
+        $( document ).ready(function() {
+    Android.gett();
+});
+
+function edt(){
+    var obj = null;
+    if($('#fnz').val().trim()!==$('#hfnz').val().trim()||$('#lnz').val().trim()!==$('#hlnz').val().trim()||$('#bdz').val().trim()!==$('#hbdz').val().trim())
+     obj = '{"pid":"'+$('#pidz').val()+'","firstname":"'+$('#fnz').val()+'","lastname":"'+$('#lnz').val()+'","birthdate":"'+$('#bdz').val()+'"}';
+    if($('#wtz').val().trim()!==$('#hwtz').val().trim())
+     obj = '{"pid":"'+$('#pidz').val()+'","firstname":"'+$('#fnz').val()+'","lastname":"'+$('#lnz').val()+'","birthdate":"'+$('#bdz').val()+'"}~~{"wt":"'+$('#wtz').val()+'"}';
+    if($('#htz').val().trim()!==$('#hhtz').val().trim())
+     obj = '{"pid":"'+$('#pidz').val()+'","firstname":"'+$('#fnz').val()+'","lastname":"'+$('#lnz').val()+'","birthdate":"'+$('#bdz').val()+'"}~~{"ht":"'+$('#htz').val()+'"}';
+    if($('#wtz').val().trim()!==$('#hwtz').val().trim()&&$('#htz').val().trim()!==$('#hhtz').val().trim())
+     obj = '{"pid":"'+$('#pidz').val()+'","firstname":"'+$('#fnz').val()+'","lastname":"'+$('#lnz').val()+'","birthdate":"'+$('#bdz').val()+'"}~~{"wt":"'+$('#wtz').val()+'"}~~{"ht":"'+$('#htz').val()+'"}';
+    
+        if(obj===null)
+            alert('No changes');
+        else
+        Android.eddt(obj); 
+}
+
+function hp_hist(id){
+    $( "#detls" ).popup( "close" );
+    Android.gethp_hist(id);
+}
+
+ 
+ function delgl(gid){
+     $( "#goall").popup( "close" );
+     Android.delGol(gid);
+ }
+    </script>
+<div>
+<ul id="list" data-role="listview" >
+</ul>
+   
+      <div data-role="popup" id="detls" class="ui-content" style="max-width:280px;" data-dismissible="false">
+          <input type="hidden" id="pidz" />
+          <table style="height: 150px;">
+        <tr>
+            <td>FName</td>
+            <td><input id="hfnz" type="hidden"><input id="fnz" type="text" style="width: 80%;"/></td>
+        </tr>
+        <tr>
+            <td>LName</td>
+            <td><input id="hlnz" type="hidden"><input id="lnz" type="text" style="width: 80%;"/></td>
+        </tr>
+        <tr>
+            <td>D.O.B</td>
+            <td><input id="hbdz" type="hidden"><input id="bdz" type="text" style="width: 80%;"/></td>
+        </tr>
+        <tr>
+            <td>Wt(kg)</td>
+            <td><input id="hwtz" type="hidden"><input id="wtz" type="text" style="width: 80%;"/></td>
+        </tr>   
+        <tr>
+            <td>Ht(m)</td>
+            <td><input id="hhtz" type="hidden"><input id="htz" type="text" style="width: 80%;"/></td>
+        </tr>
+        <tr>
+            <td><a onclick="edt();">Edit</a></td>
+            <td>
+                <a onclick="hp_hist($('#pidz').val().trim());">History</a>
+                <a onclick="$( '#detls').popup('close');">&nbsp;cancel</a>
+       </td>
+        </tr>       
+    </table>
+      
+</div> 
+    
+    <div data-role="popup" id="goal" class="ui-content" style="max-width:280px;" data-dismissible="false">
+          <input type="hidden" id="pids" />
+          <table style="height: 150px;">
+        <tr>
+            <td>Run:</td>
+            <td><input id="gl" type="text" style="width: 80%;"/></td>
+        </tr>
+        <tr>
+            <td><a onclick="edt();">Add</a></td>
+            <td>
+                <a onclick="hp_hist($('#pids').val());">History</a>
+                <a onclick="$( '#goal').popup('close');">&nbsp;cancel</a>
+       </td>
+        </tr>       
+    </table>
+      
+</div> 
+    
+    <div data-role="popup" id="hst_p" class="ui-content" style="max-width:280px;" data-dismissible="false">
+        <ul data-role="listview" class="ui-listview-outer">
+  <li data-role="collapsible" data-iconpos="right" data-shadow="false" data-corners="false">
+      <h2>&nbsp;Weight&nbsp;</h2>
+    <ul id="u_wt" data-role="listview" data-shadow="false" data-inset="true" data-corners="false">
+      
+    </ul>
+  </li>
+  <li data-role="collapsible" data-iconpos="right" data-shadow="false" data-corners="false">
+    <h2>&nbsp;Height&nbsp;</h2>
+    <ul id="u_ht" data-role="listview" data-shadow="false" data-inset="true" data-corners="false">
+    </ul>
+  </li>
+</ul>
+        <input type="button" value="close" onclick="$('#hst_p').popup('close');" /> 
+    </div>
+  
+    
+<div data-role="popup" id="del_pn" class="ui-content" style="max-width:280px" data-dismissible="false">
+Delete?
+<div data-role="controlgroup" data-type="horizontal">
+    <input type="button" value="yes" onclick="delPsn();" />
+    <input type="button" value="no" onclick="$('#del_pn').popup( 'close');"/>
+</div>
+</div>
+ 
+
+<div data-role="popup" id="del_hp" class="ui-content" style="max-width:280px" data-dismissible="false">
+Delete?
+<div data-role="controlgroup" data-type="horizontal">
+    <input type="button" value="yes" onclick="delHp();" />
+    <input type="button" value="no" onclick="$('#del_pn').popup( 'close');"/>
+</div>
+</div>
+ 
+<div data-role="popup" id="goall" class="ui-content" style="max-width:280px" data-dismissible="false">
+   <input type="hidden" id="gpid" />
+    <table>
+        <tr>
+            <td>Run:</td>
+            <td>
+                <input type="number" id="gll" placeholder="goal" /> (km)
+            </td>
+        </tr>
+        <tr>
+            <td><input type="button" value="Add" onclick="saveGoal2();" /></td>
+            <td><input type="button" value="Hist" onclick="viewGoal2();" /></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="Gifts" onclick="getCode()" /></td>
+            <td><input type="button" value="close" onclick='$("#goall").popup( "close" );' /></td>
+        </tr>
+    </table>
+   
+</div>   
+<div data-role="popup" id="ggl" class="ui-content" style="max-width:280px" data-dismissible="false">
+    <h3>Goal-History</h3>
+    <div id="gtm"></div>
+     <input type="button" value="close" onclick="$('#ggl').popup('close');" /> 
+</div>
+</div>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Keep healthy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="jquery.mobile-1.3.1.min.css" />
+    <script type="text/javascript" src="jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="jquery.mobile-1.3.1.min.js"></script>
+    <style>
+        /*this block should go in the styles.css file*/
+        .ui-panel-inner {
+            padding:0px; /*make the buttons flush edge to edge*/
+        }
+        #navpanel .ui-controlgroup {
+            margin:5; /*make the buttons flush to the top*/
+        }
+        .ui-btn {text-align: left}
+        #header {
+            height:54px;
+        }
+        #bars-button {
+            margin:7px;
+        }
+    </style>
+    <script>
+        var gen_id='';
+    function reg_users(uza){
+var allItems = '';
+$.each(uza, function(i, item) {
+ //     $("#list").append("<li onclick="getPsn('+item.pid+');">"'+item.firstname +' '+item.lastname+'"</li>");
+ // $("#list").listview("refresh");
+ allItems += '<li >\n\
+<div data-role="controlgroup" data-type="horizontal">\n\
+<input type="button" onclick="getPsn('+item.pid+');" value="'+item.firstname +' '+item.lastname+'" />\n\
+<input type="button" onclick="saveGoal('+item.pid+');" value="Goal" />\n\
+<input type="button" onclick="ppdelP('+item.pid+');" value="Del" /></div></li>';
+});
+      $("#list").empty().append(allItems).listview("refresh");
+    }
+    function cloz_reg(){
+        alert("Action successful!!");
+        $( "#popup" ).popup( "close" );
+        $('#main').html("Welcome");
+    }
+    
+    function getPsn(id){
+       // $( "#detls" ).popup( "close" );
+        Android.getHp(id);
+    }
+    
+    function hp(hp){        
+       $( "#detls" ).popup( "open" );
+ //$.each(hp, function(i, item) {
+  $('#pidz').val(hp['pid']);
+  $('#fnz').val(hp['firstname']);$('#hfnz').val(hp['firstname']);
+  $('#lnz').val(hp['lastname']);$('#hlnz').val(hp['lastname']);
+  $('#bdz').val(hp['birthdate']);$('#hbdz').val(hp['birthdate']);
+  $('#wtz').val(hp['wt']);$('#hwtz').val(hp['wt']);
+  $('#htz').val(hp['ht']);$('#hhtz').val(hp['ht']);
+  
+//}); 
+    }
+    
+ function getCode(){
+     var gid = $('#gpid').val();
+     $( "#goall").popup( "close" );
+    Android.getAuthorizationCode(gid);
+ }
+ 
+ function saveGoal(id){
+     $( "#goall").popup( "open" );
+     $('#gpid').val(id);
+    // Android.getAuthorizationCode();
+ }
+ 
+  function saveGoal2(){
+      var gdt = $('#gpid').val()+"~~"+$('#gll').val();;
+     $( "#goall").popup( "close" );
+     
+     Android.saveGoal(gdt);
+ }
+ 
+function hp_hst(hp){
+  $( "#hst_p" ).popup( "open" );
+  $.each(hp, function(i, item){
+  if(item.ht!==''){
+  $("#u_ht").append("<li onclick='del_hp("+item.hid+");'>"+item.date+"  "+item.ht+"</li>");
+  $("#u_ht").listview("refresh");
+  }
+  if(item.wt!==''){
+  $("#u_wt").append("<li onclick='del_hp("+item.hid+");'>"+item.date+"  "+item.wt+"</li>");
+  $("#u_wt").listview("refresh");
+  }
+});
+   
+}
+
+
+function ppdelP(id){
+    gen_id = id;    
+    $( "#del_pn").popup( "open" );
+}
+
+
+function delPsn(){
+   // alert(gen_id);
+   $( "#del_pn" ).popup( "close" );
+    Android.delPsn(gen_id); 
+}
+
+
+function del_hp(hid){
+  $( "#hst_p").popup( "close" );
+  Android.delHp(hid);
+}
+
+  function measures(uza){
+var tb = '<table>';
+$.each(uza, function(i, item) {
+tb+="<tr><td>"+item.type+"</td><td>("+item.measure+")</td><td></td></tr>"
+});
+tb+="</table>"
+$( "#meas").popup( "open" );
+$('#tm').html(tb);
+    }
+    
+  function call_mes(){
+     Android.getMeasure();  
+  }  
+  
+  function resett(){
+   Android.resett();
+  }
+  
+    function viewGoal2(){
+      var gdt = $('#gpid').val();;
+     $( "#goall").popup( "close" );
+     
+     Android.getGoal(gdt);
+ }
+ 
+   function goalzz(uza){
+    $( "#goall").popup( "close" );
+var tb = '<table>';
+$.each(uza, function(i, item) {
+tb+="<tr><td>"+item.date+"</td><td>"+item.val+"</td><td><input type='button' value='X' onclick='delgl("+item.gid+")' /></td></tr>";
+});
+tb+="</table>";
+$( "#ggl").popup( "open" );
+$('#gtm').html(tb);
+    }
+    
+    function enpty(){
+        alert('No Items Found!');
+    }
+</script>
+</head>
+<body>
+
+<div data-role="page" id="home" data-theme="c">
+
+    <div data-role="panel" id="navpanel" data-theme="c"
+         data-display="overlay" data-position="left">
+        <div data-role="controlgroup" data-corners="false">
+			<br><br><br>
+            <a href="#" data-role="button" data-rel="close" onclick="$('#main').load('registration.html')">Register</a>
+            <a href="#" data-role="button"  onclick="
+                //var count = $('#list').children().length;
+                //if(count>0)
+                //alert(count);
+                $('#main').load('users.html');
+          //  else alert('no users found');
+          ">View users</a>
+            <a href="#" data-role="button" onclick="call_mes();">Measures</a>
+        </div>
+    </div>
+    <div id="mn">
+    <div id="header" data-role="header" data-theme="c">
+        <a id="bars-button" style="margin-top:5px;" href="#navpanel" >Menu</a>
+        <a id="bars-button" style="margin-top:5px;" href="#" onclick="resett();" >Reset</a>
+        <h3>Keep Fit</h3>
+    </div>
+        <div data-role="content" id="main" style="width: 98%;">
+    <p>Welcome</p>
+  </div>
+    
+<div data-role="popup" id="popup" class="ui-content" style="max-width:280px" data-dismissible="false">
+Processing ... 
+</div>
+  
+<div data-role="popup" id="meas" class="ui-content" style="max-width:280px" data-dismissible="false">
+    <h3>Measures</h3>
+    <div id="tm"></div>
+     <input type="button" value="close" onclick="$('#meas').popup('close');" /> 
+</div>
+        
+</div>
+     <!-- footer -->
+    <div data-role="footer" data-position="fixed" data-theme="d" class="ui-bar">
+<div align ='center'>@Benhur</div>
+    </div>
+    <!-- About Author Popup -->
+    <div data-role="popup" id="about" data-overlay-theme="a" data-theme="c" data-dismissible="false" style="max-width:300px;" class="ui-corner-all">
+
+        <div data-role="header" class="ui-header ui-bar-c"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+             <h1>About Author</h1>
+
+        </div>
+        <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
+            <p>This app is to help you!!              
+
+        </div>
+    </div>
+    <!-- /About -->
+</div>
+
+</body>
+</html>
