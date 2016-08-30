@@ -314,11 +314,12 @@ webview.loadUrl("javascript:enpty()");
 }
 
 //load image in webview
-public void loadGift(String imgg){
+public void loadGift(String imgg,String txt){
     System.out.println("oh oh "+imgg);
 AlertDialog.Builder alert = new AlertDialog.Builder(this); 
 alert.setTitle("Message!!");
 
+RelativeLayout rl = new RelativeLayout(context);
 WebView wv = new WebView(this);
 wv.getSettings().setLoadWithOverviewMode(true);
 wv.getSettings().setUseWideViewPort(true);
@@ -330,8 +331,12 @@ wv.setWebViewClient(new WebViewClient() {
         return true;
     }
 });
-
-alert.setView(wv);
+TextView tv = new TextView(context);
+tv.setText(txt);
+rl.addView(wv);
+rl.addView(tv);
+alert.setView(rl);
+   
 alert.setNegativeButton("Close", new DialogInterface.OnClickListener() {
     @Override
     public void onClick(DialogInterface dialog, int id) {
@@ -340,6 +345,8 @@ alert.setNegativeButton("Close", new DialogInterface.OnClickListener() {
     }
 });
 alert.show();
+Toast.makeText(getApplicationContext(), txt, Toast.LENGTH_LONG).show();
+            
 }
 
 	/******************************** Check if connected to internet *******************/
@@ -494,6 +501,7 @@ alert.show();
 		String lnk = targetURL+"/miles/"+idz+"~~"+totalWalkingDistanceKm;
 		System.out.println("link "+lnk);
 	final String bk = mut.sendurl(lnk, "GET", "");
+	final String [] bk1 = bk.split("~~");
   System.out.println("pips "+ bk);
 //  if(!bk.contains("jpg"))
 //      enpty();
@@ -504,7 +512,7 @@ alert.show();
             public void run() {
             
    //loadPage();
-   loadGift(bk);    
+   loadGift(bk1[0],bk1[1]);    
 	    }
         });
   
@@ -532,8 +540,8 @@ alert.show();
 
             @Override
             public void run() {
-                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
-            }
+               Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+             }
         });
     }
 		
@@ -548,3 +556,4 @@ alert.show();
 	    }
 
 }
+
