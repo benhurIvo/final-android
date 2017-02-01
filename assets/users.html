@@ -25,11 +25,13 @@ function edt(){
     
         if(obj===null)
             alert('No changes');
-        else
+        else{
+             $('#detls').popup( "close" );
         Android.eddt(obj); 
+    }
 }
 
-function hp_hist(id){
+function hp_histt(id){
     $( "#detls" ).popup( "close" );
     Android.gethp_hist(id);
 }
@@ -39,6 +41,7 @@ function hp_hist(id){
      $( "#goall").popup( "close" );
      Android.delGol(gid);
  }
+ 
     </script>
 <div>
 <ul id="list" data-role="listview" >
@@ -88,7 +91,7 @@ function hp_hist(id){
         <tr>
             <td><a onclick="edt();">Add</a></td>
             <td>
-                <a onclick="hp_hist($('#pids').val());">History</a>
+                <a onclick="hp_histt($('#pids').val());">History</a>
                 <a onclick="$( '#goal').popup('close');">&nbsp;cancel</a>
        </td>
         </tr>       
@@ -97,8 +100,9 @@ function hp_hist(id){
 </div> 
     
     <div data-role="popup" id="hst_p" class="ui-content" style="max-width:280px;" data-dismissible="false">
-        <ul data-role="listview" class="ui-listview-outer">
-  <li data-role="collapsible" data-iconpos="right" data-shadow="false" data-corners="false">
+       <ul data-role="listview" class="ui-listview-outer">
+ <li data-role="list-divider"> Date --- value</li>
+<li data-role="collapsible" data-iconpos="right" data-shadow="false" data-corners="false">
       <h2>&nbsp;Weight&nbsp;</h2>
     <ul id="u_wt" data-role="listview" data-shadow="false" data-inset="true" data-corners="false">
       

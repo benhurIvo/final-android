@@ -27,9 +27,9 @@
         var gen_id='';
     function reg_users(uza){
 var allItems = '';
+ $("#list").empty();
 $.each(uza, function(i, item) {
  //     $("#list").append("<li onclick="getPsn('+item.pid+');">"'+item.firstname +' '+item.lastname+'"</li>");
- // $("#list").listview("refresh");
  allItems += '<li >\n\
 <div data-role="controlgroup" data-type="horizontal">\n\
 <input type="button" onclick="getPsn('+item.pid+');" value="'+item.firstname +' '+item.lastname+'" />\n\
@@ -39,8 +39,8 @@ $.each(uza, function(i, item) {
       $("#list").empty().append(allItems).listview("refresh");
     }
     function cloz_reg(){
-        alert("Action successful!!");
-        $( "#popup" ).popup( "close" );
+       // alert("Action successful!!");
+       // $( "#popup" ).popup( "close" );
         $('#main').html("Welcome");
     }
     
@@ -81,19 +81,23 @@ $.each(uza, function(i, item) {
      Android.saveGoal(gdt);
  }
  
-function hp_hst(hp){
+function hp_hst(hp){  
+    alert('haha');
+    /*
+    $("#u_wt").empty();
+      $("#u_wt").empty();
   $( "#hst_p" ).popup( "open" );
   $.each(hp, function(i, item){
   if(item.ht!==''){
-  $("#u_ht").append("<li onclick='del_hp("+item.hid+");'>"+item.date+"  "+item.ht+"</li>");
+  $("#u_ht").append("<li onclick='del_hp("+item.hid+");'>"+item.date+"  "+item.ht+"m</li>");
   $("#u_ht").listview("refresh");
   }
   if(item.wt!==''){
-  $("#u_wt").append("<li onclick='del_hp("+item.hid+");'>"+item.date+"  "+item.wt+"</li>");
+  $("#u_wt").append("<li onclick='del_hp("+item.hid+");'>"+item.date+"  "+item.wt+"kg</li>");
   $("#u_wt").listview("refresh");
   }
 });
-   
+   */
 }
 
 
@@ -142,9 +146,9 @@ $('#tm').html(tb);
  
    function goalzz(uza){
     $( "#goall").popup( "close" );
-var tb = '<table>';
+var tb = '<table><tr><td>Date</td><td> Value </td><td></td></tr>';
 $.each(uza, function(i, item) {
-tb+="<tr><td>"+item.date+"</td><td>"+item.val+"</td><td><input type='button' value='X' onclick='delgl("+item.gid+")' /></td></tr>";
+tb+="<tr><td>"+item.date+"</td><td>"+item.val+"km</td><td><input type='button' value='[ del ]' onclick='delgl("+item.gid+")' /></td></tr>";
 });
 tb+="</table>";
 $( "#ggl").popup( "open" );
@@ -154,6 +158,11 @@ $('#gtm').html(tb);
     function enpty(){
         alert('No Items Found!');
     }
+    
+    function hp_hist(id){
+   // $( "#detls" ).popup( "close" );
+    Android.gethp_hist(id);
+}
 </script>
 </head>
 <body>
